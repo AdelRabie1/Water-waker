@@ -23,6 +23,8 @@ The following line is responsible to create the classifier system that opencv wi
  Then, we run this line to capture video from the camera connected to the RasberryPi.
  ```
  cap = cv2.VideoCapture(0)
+ r1 = 0
+ r2 = 0
  ```
  We also initialize 2 ready variable `r1` and `r2` to 0. `r1` will be set to 1 if we aim at the face in the x direction, same with `r2` in the y direction.
  In a while loop that runs forever until manually broken by user the following happens:
