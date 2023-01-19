@@ -48,6 +48,74 @@ while True:
  ```
  If `len(faces) == 0` this means that no face is detected and so we make sure that all motors stop running, as well as set our ready signals to 0.
  
+ The below code is in the following for loop:
+ ```
+     for (x, y, w, h) in faces:
+            #cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+ ```
+ This for loop takes the x, y coordinates as well as the width and height of the detected face from the variable faces.
+ 
+ For the x direction, the entire frame goes from 0 to 500,
+ If position of face in the x direction is greater than 300: rotate clockwise, and since the motor moves too fast for face detect to keep up, the motor is on for only 0.05 seconds in every loop.
+ ```
+     if x > 300:
+            r1 = 0
+            motorxB.on()
+            motorxR.off()
+            sleep(0.05)
+            motorxB.off()
+  ```
+ Same code for if x is less than 200:
+ ```
+      elif x < 200:
+            r1 = 0
+            motorxR.on()
+            motorxB.off()
+            sleep(0.05)
+            motorxR.off()
+ ```
+ If x position of face is in the center of the frame then we turn off the motor andset `r1 = 1` since we are aimed in the x direction. The following code does that.
+ 
+```
+       else:
+            motorxR.off()
+            motorxB.off()
+            r1 = 1
+```
+Same process is done for the motor aiming the device in the y direction(the frame goes from 0 to 350)
+```
+       if y < 130:
+            r2 = 0
+            motoryB.on()
+            motoryR.off()
+            sleep(0.05)
+            motoryB.off()  
+            
+        elif y > 220:
+            r2 = 0
+            motoryR.on()
+            motoryB.off()
+            sleep(0.05)
+            motoryR.off()
+        
+        else:
+            motoryR.off()
+            motoryB.off()
+            r2 = 1
+```
+Once the face is in the center of the frame in the y and x direction, the following code runs:
+```
+        if  r1 == 1 and r2 == 1:
+            servo.mid()
+            sleep(0.2)
+            servo.value= -0.5
+            sleep(0.2)
+            servo.mid()
+```
+The above code tells the servo motor to switch between 2 positions: pulling the trigger and then moving away; similar motion to a finger pulling a trigger.
+   
+ 
+ 
  
  
  
