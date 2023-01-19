@@ -46,6 +46,8 @@ while True:
             r1 = 0
             r2 = 0
  ```
- If `len(faces) == 0` this means that no face is detected and so we make sure that all motors stop running, as well as `r1` and `r2` which are out ready signals that we are aimed at the face.
+ If `len(faces) == 0` this means that no face is detected and so we make sure that all motors stop running, as well as set our ready signals to 0.
+ 
+ 
  
  
