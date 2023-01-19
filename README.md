@@ -20,4 +20,29 @@ The following line is responsible to create the classifier system that opencv wi
  ```
  face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
  ```
+ Then, we run this line to capture video from the camera connected to the RasberryPi.
+ ```
+ cap = cv2.VideoCapture(0)
+ ```
+ We also initialize 2 ready variable `r1` and `r2` to 0. `r1` will be set to 1 if we aim at the face in the x direction, same with `r2` in the y direction.
+ In a while loop that runs forever until manually broken by user the following happens:
+```
+while True:
+    ret, img = cap.read()
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+```
+`img` will contain a single frame from the video, then we convert `img` into grayscale for easier face detection. Afterwards `face_cascade.detectMultiScale(gray, 1.1, 4)` takes the frame gray and returns a list faces that contains coordinate information and size of the detected faces and returns it in variable faces.
+
+```
+if len(faces) == 0:
+            motorxR.off()
+            motorxB.off()
+            motoryR.off()
+            motoryB.off()
+            r1 = 0
+            r2 = 0
+ ```
+ If `len(faces) == 0` this means that no face is detected and so we make sure that all motors stop running, as well as `r1` and `r2` which are out ready signals that we are aimed at the face.
+ 
  
