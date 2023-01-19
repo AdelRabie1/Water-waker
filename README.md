@@ -38,7 +38,7 @@ while True:
 `img` will contain a single frame from the video, then we convert `img` into grayscale for easier face detection. Afterwards `face_cascade.detectMultiScale(gray, 1.1, 4)` takes the frame gray and returns a list faces that contains coordinate information and size of the detected faces and returns it in variable faces.
 
 ```
-if len(faces) == 0:
+     if len(faces) == 0:
             motorxR.off()
             motorxB.off()
             motoryR.off()
